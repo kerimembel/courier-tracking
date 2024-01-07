@@ -1,10 +1,16 @@
 package com.migrosone.couriertracking.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.migrosone.couriertracking.enumaration.DistanceUnit;
+import com.migrosone.couriertracking.util.impl.JsonToPointDeserializer;
+import com.migrosone.couriertracking.util.impl.PointToJsonSerializer;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
@@ -31,12 +37,16 @@ import java.util.List;
 public class Courier extends BaseEntity {
 
     @OneToOne
+    @JsonIgnore
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @OneToMany(mappedBy = "courier")
+    @JsonIgnore
+    @OneToMany(mappedBy = "courier", fetch = FetchType.LAZY)
     private List<CourierEntry> courierEntries = new ArrayList<>();
 
+    @JsonSerialize(using = PointToJsonSerializer.class)
+    @JsonDeserialize(using = JsonToPointDeserializer.class)
     @Column(columnDefinition = "geometry(Point,4326)")
     private Point lastLocation;
 
