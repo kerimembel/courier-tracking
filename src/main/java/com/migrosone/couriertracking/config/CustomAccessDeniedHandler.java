@@ -10,6 +10,14 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 
 import java.io.IOException;
 
+/**
+ * Custom Access Denied Handler to handle AccessDeniedException and provide a customized JSON response.
+ *
+ * @author Kerim Embel
+ * @version 0.0.1
+ * @since 0.0.1
+ */
+
 @Configuration
 public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 
