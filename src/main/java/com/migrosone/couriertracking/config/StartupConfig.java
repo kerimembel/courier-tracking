@@ -27,6 +27,7 @@ public class StartupConfig {
     public CommandLineRunner initDatabase() {
         return args -> {
             userService.createAdminUser();
+            userService.createInitialCourier();
             storeService.loadStoreLocationsFromJson();
         };
     }

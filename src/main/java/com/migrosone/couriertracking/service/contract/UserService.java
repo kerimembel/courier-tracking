@@ -14,6 +14,8 @@ import com.migrosone.couriertracking.model.User;
 public interface UserService {
     void createAdminUser();
 
+    void createInitialCourier();
+
     boolean existsByEmail(String email);
 
     User save(User user);

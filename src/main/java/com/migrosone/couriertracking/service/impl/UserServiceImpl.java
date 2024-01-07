@@ -40,7 +40,22 @@ public class UserServiceImpl implements UserService {
                     "admin@migrosone.com",
                     passwordEncoder.encode("admin"),
                     UserRole.ADMIN);
-            userRepository.save(admin);
+            handleUserCreation(admin);
+        } catch (DataIntegrityViolationException e) {
+            log.info("Admin user already exists.");
+        }
+    }
+
+    @Override
+    public void createInitialCourier() {
+        try {
+            User courier = new User(
+                    "courier",
+                    "courier",
+                    "courier@migrosone.com",
+                    passwordEncoder.encode("courier"),
+                    UserRole.COURIER);
+            handleUserCreation(courier);
         } catch (DataIntegrityViolationException e) {
             log.info("Admin user already exists.");
         }

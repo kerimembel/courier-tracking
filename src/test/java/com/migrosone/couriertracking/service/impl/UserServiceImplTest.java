@@ -54,6 +54,15 @@ public class UserServiceImplTest {
     }
 
     @Test
+    public void createInitialCourier_Success() {
+        when(passwordEncoder.encode("courier")).thenReturn("encodedCourierPassword");
+        when(userRepository.save(any())).thenReturn(new User("courier", "courier", "courier@courier.com",
+                "encodedCourierPassword", UserRole.COURIER));
+
+        assertDoesNotThrow(() -> userService.createInitialCourier());
+    }
+
+    @Test
     public void existsByEmail_True() {
         when(userRepository.existsByEmail("test@example.com")).thenReturn(true);
 
