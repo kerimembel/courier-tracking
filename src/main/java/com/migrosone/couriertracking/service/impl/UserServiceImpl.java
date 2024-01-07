@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
             User admin = new User(
                     "admin",
                     "admin",
-                    "admin@admin.com",
+                    "admin@migrosone.com",
                     passwordEncoder.encode("admin"),
                     UserRole.ADMIN);
             userRepository.save(admin);
