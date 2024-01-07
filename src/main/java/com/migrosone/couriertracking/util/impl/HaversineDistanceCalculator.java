@@ -19,9 +19,8 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class HaversineDistanceCalculator implements DistanceCalculator {
 
-    private final DistanceConverter distanceConverter;
-
     private static final double EARTH_RADIUS = 6371.0;
+    private final DistanceConverter distanceConverter;
 
     @Override
     public double calculateDistance(double x1, double y1, double x2, double y2, DistanceUnit targetUnit) {
