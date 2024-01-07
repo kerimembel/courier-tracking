@@ -44,7 +44,7 @@ public class CourierController {
                 request.getTimestamp()
         );
         GenericResponse<String> response = GenericResponse.success("Courier location processed successfully.");
-        return ResponseEntity.accepted().body(response);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/total-travel-distance")
