@@ -1,5 +1,6 @@
 package com.migrosone.couriertracking.security;
 
+import com.migrosone.couriertracking.config.CustomAccessDeniedHandler;
 import com.migrosone.couriertracking.security.jwt.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -28,6 +29,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SpringSecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    private final CustomAccessDeniedHandler customAccessDeniedHandler;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -38,7 +40,7 @@ public class SpringSecurityConfig {
                         .anyRequest().authenticated()
         );
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-
+        http.exceptionHandling((exceptionHandling) -> exceptionHandling.accessDeniedHandler(customAccessDeniedHandler));
         return http.build();
     }
 
