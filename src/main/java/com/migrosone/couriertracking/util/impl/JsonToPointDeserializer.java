@@ -15,19 +15,22 @@ public class JsonToPointDeserializer extends JsonDeserializer<Point> {
 
     @Override
     public Point deserialize(JsonParser jp, DeserializationContext ctxt) {
-
         try {
             String text = jp.getText();
-            if (text == null || text.length() <= 0)
-                return null;
-
-            String[] coordinates = text.replaceFirst("POINT ?\\(", "").replaceFirst("\\)", "").split(" ");
-            double lat = Double.parseDouble(coordinates[0]);
-            double lon = Double.parseDouble(coordinates[1]);
-
-            return geometryFactory.createPoint(new Coordinate(lat, lon));
+            return parseToPoint(text);
         } catch (Exception e) {
             return null;
         }
+    }
+
+    protected Point parseToPoint(String text) {
+        if (text == null || text.length() == 0)
+            return null;
+
+        String[] coordinates = text.replaceFirst("POINT ?\\(", "").replaceFirst("\\)", "").split(" ");
+        double lat = Double.parseDouble(coordinates[0]);
+        double lon = Double.parseDouble(coordinates[1]);
+
+        return geometryFactory.createPoint(new Coordinate(lat, lon));
     }
 }

@@ -1,6 +1,7 @@
 package com.migrosone.couriertracking.controller;
 
-import com.migrosone.couriertracking.model.Courier;
+import com.migrosone.couriertracking.dto.CourierDto;
+import com.migrosone.couriertracking.payload.response.CourierListResponse;
 import com.migrosone.couriertracking.payload.response.GenericResponse;
 import com.migrosone.couriertracking.service.contract.CourierService;
 import lombok.RequiredArgsConstructor;
@@ -30,16 +31,16 @@ public class CourierAdminController {
     private final CourierService courierService;
 
     @GetMapping()
-    public ResponseEntity<GenericResponse<List<Courier>>> getAllCouriers() {
-        List<Courier> couriers = courierService.getAllCouriers();
-        GenericResponse<List<Courier>> response = GenericResponse.success(couriers);
+    public ResponseEntity<GenericResponse<CourierListResponse>> getAllCouriers() {
+        List<CourierDto> couriers = courierService.getAllCouriers();
+        GenericResponse<CourierListResponse> response = GenericResponse.success(new CourierListResponse(couriers));
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{courierId}")
-    public ResponseEntity<GenericResponse<Courier>> getCourierById(@PathVariable UUID courierId) {
-        Courier courier = courierService.getCourierById(courierId);
-        GenericResponse<Courier> response = GenericResponse.success(courier);
+    public ResponseEntity<GenericResponse<CourierDto>> getCourierById(@PathVariable UUID courierId) {
+        CourierDto courier = courierService.getCourierById(courierId);
+        GenericResponse<CourierDto> response = GenericResponse.success(courier);
         return ResponseEntity.ok(response);
     }
 

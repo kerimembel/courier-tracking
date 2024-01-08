@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -21,4 +22,8 @@ import java.util.UUID;
 public interface CourierEntryRepository extends JpaRepository<CourierEntry, UUID> {
 
     boolean existsByCourierAndStoreAndEntryTimeAfter(Courier courier, Store store, LocalDateTime timestamp);
+
+    List<CourierEntry> findAllByCourierId(UUID courierId);
+
+    List<CourierEntry> findAllByCourierIdAndStoreId(UUID courierId, UUID storeId);
 }

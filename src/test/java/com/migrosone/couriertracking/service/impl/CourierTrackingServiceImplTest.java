@@ -52,8 +52,8 @@ public class CourierTrackingServiceImplTest {
     @Test
     public void testProcessCourierLocationUpdate() {
         UUID courierId = UUID.randomUUID();
-        double latitude = 40.7128;
-        double longitude = -74.0060;
+        double latitude = 40.9923307;
+        double longitude = 29.1244229;
         LocalDateTime timestamp = LocalDateTime.now();
 
         Courier courier = new Courier();

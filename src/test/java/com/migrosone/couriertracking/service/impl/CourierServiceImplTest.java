@@ -1,5 +1,7 @@
 package com.migrosone.couriertracking.service.impl;
 
+import com.migrosone.couriertracking.dto.CourierDto;
+import com.migrosone.couriertracking.mapper.CourierMapper;
 import com.migrosone.couriertracking.model.Courier;
 import com.migrosone.couriertracking.repository.CourierRepository;
 import org.junit.Test;
@@ -28,6 +30,8 @@ import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
 public class CourierServiceImplTest {
+
+    private final CourierMapper courierMapper = CourierMapper.INSTANCE;
 
     @Mock
     private CourierRepository courierRepository;
@@ -58,9 +62,13 @@ public class CourierServiceImplTest {
 
         when(courierRepository.findAll()).thenReturn(expectedCouriers);
 
-        List<Courier> actualCouriers = courierService.getAllCouriers();
+        List<CourierDto> actualCouriers = courierService.getAllCouriers();
 
-        assertEquals(expectedCouriers, actualCouriers);
+        List<CourierDto> expectedCourierDtoList = expectedCouriers.stream()
+                .map(courierMapper::toDto)
+                .toList();
+
+        assertEquals(expectedCourierDtoList, actualCouriers);
 
         verify(courierRepository, times(1)).findAll();
     }
@@ -72,9 +80,9 @@ public class CourierServiceImplTest {
 
         when(courierRepository.findCourierById(courierId)).thenReturn(Optional.of(expectedCourier));
 
-        Courier actualCourier = courierService.getCourierById(courierId);
+        CourierDto actualCourier = courierService.getCourierById(courierId);
 
-        assertEquals(expectedCourier, actualCourier);
+        assertEquals(courierMapper.toDto(expectedCourier), actualCourier);
 
         verify(courierRepository, times(1)).findCourierById(courierId);
     }

@@ -32,8 +32,8 @@ public class EnterStoreObserverTest {
     @Test
     public void testHandleLocationUpdate() {
         Courier courier = new Courier();
-        double latitude = 40.7128;
-        double longitude = -74.0060;
+        double latitude = 40.9923307;
+        double longitude = 29.1244229;
         LocalDateTime timestamp = LocalDateTime.now();
 
         enterStoreObserver.handleLocationUpdate(courier, latitude, longitude, timestamp);

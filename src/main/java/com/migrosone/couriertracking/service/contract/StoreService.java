@@ -1,5 +1,6 @@
 package com.migrosone.couriertracking.service.contract;
 
+import com.migrosone.couriertracking.dto.StoreDto;
 import com.migrosone.couriertracking.model.Store;
 import jakarta.transaction.Transactional;
 
@@ -20,4 +21,5 @@ public interface StoreService {
 
     List<Store> findStoresWithinDistance(double latitude, double longitude, double maxDistance);
 
+    List<StoreDto> getAllStores();
 }

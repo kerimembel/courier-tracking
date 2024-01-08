@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserService {
                     UserRole.COURIER);
             handleUserCreation(courier);
         } catch (DataIntegrityViolationException e) {
-            log.info("Admin user already exists.");
+            log.info("Courier user already exists.");
         }
     }
 

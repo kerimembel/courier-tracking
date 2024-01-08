@@ -1,6 +1,6 @@
 package com.migrosone.couriertracking.controller;
 
-import com.migrosone.couriertracking.model.Courier;
+import com.migrosone.couriertracking.dto.CourierDto;
 import com.migrosone.couriertracking.service.contract.CourierService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,12 +39,12 @@ public class CourierAdminControllerTest {
 
     @Test
     public void testGetAllCouriers() throws Exception {
-        Courier courier1 = new Courier();
-        Courier courier2 = new Courier();
+        CourierDto courier1 = new CourierDto();
+        CourierDto courier2 = new CourierDto();
         courier1.setId(UUID.randomUUID());
         courier2.setId(UUID.randomUUID());
 
-        List<Courier> couriers = Arrays.asList(courier1, courier2);
+        List<CourierDto> couriers = Arrays.asList(courier1, courier2);
         when(courierService.getAllCouriers()).thenReturn(couriers);
 
         ResultActions resultActions = mockMvc.perform(get("/v0/admin/couriers"));
@@ -53,9 +53,9 @@ public class CourierAdminControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.success").value(true))
-                .andExpect(jsonPath("$.data").isArray())
-                .andExpect(jsonPath("$.data[0].id").value(courier1.getId().toString()))
-                .andExpect(jsonPath("$.data[1].id").value(courier2.getId().toString()));
+                .andExpect(jsonPath("$.data.couriers").isArray())
+                .andExpect(jsonPath("$.data.couriers[0].id").value(courier1.getId().toString()))
+                .andExpect(jsonPath("$.data.couriers[1].id").value(courier2.getId().toString()));
     }
 
     @Test
@@ -68,7 +68,7 @@ public class CourierAdminControllerTest {
     @Test
     public void testGetCourierById() throws Exception {
         UUID courierId = UUID.randomUUID();
-        Courier courier = new Courier();
+        CourierDto courier = new CourierDto();
         courier.setId(courierId);
         when(courierService.getCourierById(courierId)).thenReturn(courier);
 

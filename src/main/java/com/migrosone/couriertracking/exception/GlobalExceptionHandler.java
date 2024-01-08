@@ -39,8 +39,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity<GenericResponse<Object>> handleUnauthorized(Exception exception) {
         log.error("Request could not be processed: ", exception);
-        GenericResponse<Object> response = GenericResponse.error("You are " +
-                "unauthorized for this request!");
+        GenericResponse<Object> response = GenericResponse.error("You are unauthorized for this request!");
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
     }
 

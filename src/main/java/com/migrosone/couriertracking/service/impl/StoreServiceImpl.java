@@ -2,6 +2,8 @@ package com.migrosone.couriertracking.service.impl;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.migrosone.couriertracking.dto.StoreDto;
+import com.migrosone.couriertracking.mapper.StoreMapper;
 import com.migrosone.couriertracking.model.Store;
 import com.migrosone.couriertracking.repository.StoreRepository;
 import com.migrosone.couriertracking.service.contract.StoreService;
@@ -34,10 +36,16 @@ public class StoreServiceImpl implements StoreService {
 
     private final StoreRepository storeRepository;
     private final GeometryFactory geometryFactory;
+    private final StoreMapper storeMapper = StoreMapper.INSTANCE;
 
     @Override
     public List<Store> findStoresWithinDistance(double latitude, double longitude, double maxDistance) {
         return storeRepository.findStoresWithinDistance(latitude, longitude, maxDistance);
+    }
+
+    @Override
+    public List<StoreDto> getAllStores() {
+        return storeMapper.toDto(storeRepository.findAll());
     }
 
     @Override

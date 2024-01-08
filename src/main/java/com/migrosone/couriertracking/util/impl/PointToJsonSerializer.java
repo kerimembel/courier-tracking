@@ -12,18 +12,19 @@ public class PointToJsonSerializer extends JsonSerializer<Point> {
     @Override
     public void serialize(Point value, JsonGenerator jgen,
                           SerializerProvider provider) throws IOException {
+        String jsonValue = serializePoint(value);
+        jgen.writeString(jsonValue);
+    }
 
-        String jsonValue = "null";
+    protected String serializePoint(Point value) {
         try {
             if (value != null) {
                 double lat = value.getY();
                 double lon = value.getX();
-                jsonValue = String.format("POINT (%s %s)", lat, lon);
+                return String.format("POINT (%s %s)", lat, lon);
             }
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
-
-        jgen.writeString(jsonValue);
+        return "null";
     }
-
 }

@@ -1,9 +1,5 @@
 package com.migrosone.couriertracking.model;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.migrosone.couriertracking.util.impl.JsonToPointDeserializer;
-import com.migrosone.couriertracking.util.impl.PointToJsonSerializer;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -35,8 +31,6 @@ public class Store extends BaseEntity {
 
     private String name;
 
-    @JsonSerialize(using = PointToJsonSerializer.class)
-    @JsonDeserialize(using = JsonToPointDeserializer.class)
     @Column(columnDefinition = "geometry(Point,4326)")
     private Point location;
 }
