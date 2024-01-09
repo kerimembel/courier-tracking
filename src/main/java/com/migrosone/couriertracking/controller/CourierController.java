@@ -1,5 +1,6 @@
 package com.migrosone.couriertracking.controller;
 
+import com.migrosone.couriertracking.dto.TotalDistanceDto;
 import com.migrosone.couriertracking.payload.request.CourierLocationRequest;
 import com.migrosone.couriertracking.payload.response.GenericResponse;
 import com.migrosone.couriertracking.payload.response.TotalDistanceResponse;
@@ -49,7 +50,7 @@ public class CourierController {
 
     @GetMapping("/total-travel-distance")
     public ResponseEntity<GenericResponse<TotalDistanceResponse>> getTotalTravelDistance(@PathVariable UUID courierId) {
-        Double totalTravelDistance = courierService.getTotalTravelDistance(courierId);
+        TotalDistanceDto totalTravelDistance = courierService.getTotalTravelDistance(courierId);
         GenericResponse<TotalDistanceResponse> response =
                 GenericResponse.success(new TotalDistanceResponse(totalTravelDistance));
         return ResponseEntity.ok(response);

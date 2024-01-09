@@ -1,6 +1,8 @@
 package com.migrosone.couriertracking.service.impl;
 
 import com.migrosone.couriertracking.dto.CourierDto;
+import com.migrosone.couriertracking.dto.TotalDistanceDto;
+import com.migrosone.couriertracking.enumaration.DistanceUnit;
 import com.migrosone.couriertracking.mapper.CourierMapper;
 import com.migrosone.couriertracking.model.Courier;
 import com.migrosone.couriertracking.repository.CourierRepository;
@@ -47,9 +49,10 @@ public class CourierServiceImplTest {
 
         when(courierRepository.findCourierById(courierId)).thenReturn(Optional.of(courier));
 
-        Double totalTravelDistance = courierService.getTotalTravelDistance(courierId);
+        TotalDistanceDto distanceDto = courierService.getTotalTravelDistance(courierId);
 
-        assertEquals(100.0, totalTravelDistance, 0.001);
+        assertEquals(100.0, distanceDto.getTotalTravelDistance(), 0.001);
+        assertEquals(DistanceUnit.KM, distanceDto.getDistanceUnit());
 
         verify(courierRepository, times(1)).findCourierById(courierId);
     }

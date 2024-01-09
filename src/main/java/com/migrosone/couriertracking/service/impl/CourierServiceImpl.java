@@ -1,6 +1,7 @@
 package com.migrosone.couriertracking.service.impl;
 
 import com.migrosone.couriertracking.dto.CourierDto;
+import com.migrosone.couriertracking.dto.TotalDistanceDto;
 import com.migrosone.couriertracking.exception.NotFoundException;
 import com.migrosone.couriertracking.mapper.CourierMapper;
 import com.migrosone.couriertracking.model.Courier;
@@ -29,10 +30,10 @@ public class CourierServiceImpl implements CourierService {
     private final CourierMapper courierMapper = CourierMapper.INSTANCE;
 
     @Override
-    public Double getTotalTravelDistance(UUID courierId) {
+    public TotalDistanceDto getTotalTravelDistance(UUID courierId) {
         Courier courier = courierRepository.findCourierById(courierId)
                 .orElseThrow(() -> new NotFoundException(Courier.class, courierId));
-        return courier.getTotalTravelDistance();
+        return new TotalDistanceDto(courier.getTotalTravelDistance(), courier.getDistanceUnit());
     }
 
     @Override

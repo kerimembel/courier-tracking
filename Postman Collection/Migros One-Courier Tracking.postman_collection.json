@@ -273,7 +273,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{prod_api_url}}/v0/couriers/{{courierId}}/entries/store/{{storeId}}",
+					"raw": "{{prod_api_url}}/v0/couriers/{{courierId}}/entries/stores/{{storeId}}",
 					"host": [
 						"{{prod_api_url}}"
 					],
@@ -282,7 +282,7 @@
 						"couriers",
 						"{{courierId}}",
 						"entries",
-						"store",
+						"stores",
 						"{{storeId}}"
 					]
 				}

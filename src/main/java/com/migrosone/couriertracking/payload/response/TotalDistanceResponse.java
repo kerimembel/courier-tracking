@@ -1,6 +1,7 @@
 package com.migrosone.couriertracking.payload.response;
 
-import lombok.AllArgsConstructor;
+import com.migrosone.couriertracking.dto.TotalDistanceDto;
+import com.migrosone.couriertracking.enumaration.DistanceUnit;
 import lombok.Data;
 
 /**
@@ -12,8 +13,13 @@ import lombok.Data;
  */
 
 @Data
-@AllArgsConstructor
 public class TotalDistanceResponse {
 
     private Double totalTravelDistance;
+    private DistanceUnit distanceUnit;
+
+    public TotalDistanceResponse(TotalDistanceDto dto) {
+        this.totalTravelDistance = dto.getTotalTravelDistance();
+        this.distanceUnit = dto.getDistanceUnit();
+    }
 }

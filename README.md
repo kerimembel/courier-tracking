@@ -179,7 +179,8 @@ Feel free to use these test users to explore and test the features of the Courie
   "success": true,
   "message": "success",
   "data": {
-    "totalTravelDistance": 111.19492664455873
+    "totalTravelDistance": 111.19492664455873,
+    "distanceUnit": "KM"
   }
 }
 ```
@@ -211,7 +212,7 @@ Feel free to use these test users to explore and test the features of the Courie
 ```
 #### Get Store Entry for Courier
 
-- **Endpoint:** `/v0/couriers/{courierId}/entries/store/{storeId}`
+- **Endpoint:** `/v0/couriers/{courierId}/entries/stores/{storeId}`
 - **HTTP Method:** `GET`
 - **Description:** Retrieves store entries for a specific courier and store.
 - **Request Parameters:**

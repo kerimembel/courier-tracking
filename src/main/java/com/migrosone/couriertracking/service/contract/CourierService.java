@@ -1,6 +1,7 @@
 package com.migrosone.couriertracking.service.contract;
 
 import com.migrosone.couriertracking.dto.CourierDto;
+import com.migrosone.couriertracking.dto.TotalDistanceDto;
 
 import java.util.List;
 import java.util.UUID;
@@ -15,7 +16,7 @@ import java.util.UUID;
 
 public interface CourierService {
 
-    Double getTotalTravelDistance(UUID courierId);
+    TotalDistanceDto getTotalTravelDistance(UUID courierId);
 
     List<CourierDto> getAllCouriers();
 

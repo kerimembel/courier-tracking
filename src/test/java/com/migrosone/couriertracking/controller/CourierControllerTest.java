@@ -1,5 +1,7 @@
 package com.migrosone.couriertracking.controller;
 
+import com.migrosone.couriertracking.dto.TotalDistanceDto;
+import com.migrosone.couriertracking.enumaration.DistanceUnit;
 import com.migrosone.couriertracking.payload.request.CourierLocationRequest;
 import com.migrosone.couriertracking.service.contract.CourierService;
 import com.migrosone.couriertracking.service.contract.CourierTrackingService;
@@ -23,6 +25,14 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+/**
+ * Integration test for {@link CourierController}.
+ *
+ * @author Kerim Embel
+ * @version 0.0.1
+ * @since 0.0.1
+ */
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
@@ -61,12 +71,15 @@ public class CourierControllerTest extends IntegrationTest {
     public void testGetTotalTravelDistance() throws Exception {
         UUID courierId = UUID.randomUUID();
         Double totalTravelDistance = 100.0;
+        TotalDistanceDto totalDistanceDto = new TotalDistanceDto(totalTravelDistance, DistanceUnit.KM);
 
-        when(courierService.getTotalTravelDistance(courierId)).thenReturn(totalTravelDistance);
+        when(courierService.getTotalTravelDistance(courierId)).thenReturn(totalDistanceDto);
 
         mockMvc.perform(get("/v0/couriers/{courierId}/total-travel-distance", courierId))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.success").value(true))
-                .andExpect(jsonPath("$.data.totalTravelDistance").value(totalTravelDistance));
+                .andExpect(jsonPath("$.data.totalTravelDistance").value(totalTravelDistance))
+                .andExpect(jsonPath("$.data.distanceUnit").value("KM"));
+
     }
 }

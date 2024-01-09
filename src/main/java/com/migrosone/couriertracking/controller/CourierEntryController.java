@@ -38,7 +38,7 @@ public class CourierEntryController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/store/{storeId}")
+    @GetMapping("/stores/{storeId}")
     public ResponseEntity<GenericResponse<CourierEntryListResponse>> getStoreEntryForCourier(
             @PathVariable UUID courierId,
             @PathVariable UUID storeId
