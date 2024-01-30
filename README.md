@@ -15,6 +15,8 @@ For building and running the application you need:
 
 ## Live Demo
 
+> **Note:** Live Demo is no longer available.
+
 If you would like to explore and test the Courier Tracking Application, you can access the live demo at [https://courier-tracking.keonsys.com](https://courier-tracking.keonsys.com)
 
 ## Postman Collection
